@@ -10,7 +10,11 @@ const UserSchema = new Schema({
   'api_token': {
     type: String,
     unique: true
-  }
+  },
+  'desc': String,
+  'title': String,
+  'company': String,
+  'money': String
 })
 
 module.exports = mongoose.model('User', UserSchema)

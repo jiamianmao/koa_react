@@ -8,7 +8,6 @@ const register = async(ctx, next) => {
   const reg = /\w{4,14}/
   if (reg.test(account) && reg.test(password)) {
     const result = await UserModel.findOne({account})
-    console.log(result)
     if (result) {
       ctx.body = {
         code: 1,
@@ -23,7 +22,6 @@ const register = async(ctx, next) => {
           type,
           api_token: Math.random()
         })
-        console.log(user)
         await user.save()
 
         ctx.body = {

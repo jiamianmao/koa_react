@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 class Auth extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {}
   }
 
   componentDidMount() {
