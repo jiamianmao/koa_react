@@ -12,6 +12,7 @@ api.get('/user/info', ctx => {
 })
 
 api.post('/register', User.register)
+api.post('/login', User.login)
 
 router.use('/user', api.routes(), api.allowedMethods())
 
