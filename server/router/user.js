@@ -1,18 +1,15 @@
 const Router = require('koa-router')
 const User = require('../app/controllers/user')
+const Chat = require('../app/controllers/chat')
 const api = new Router()
 const router = new Router()
 
-// 用户信息
-api.get('/user/info', ctx => {
-  ctx.body = {
-    code: 1,
-    message: 'ok'
-  }
-})
-
 api.post('/register', User.register)
 api.post('/login', User.login)
+api.post('/update', User.signinRequire, User.update)
+api.get('/list', User.userList)
+api.get('/info', User.userInfo)
+api.get('/msglist', Chat.msgList)
 
 router.use('/user', api.routes(), api.allowedMethods())
 

@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
-import { getUserInfo } from '@/util/api'
 import { withRouter } from 'react-router-dom'
+import { getUserInfo } from '@/util/api'
+import { connect } from 'react-redux'
+import { authSuccess } from '@/redux/user'
+import { Redirect } from 'react-router-dom'
+
+@connect(
+  state => state.user,
+  { authSuccess }
+)
 @withRouter
 class Auth extends Component {
   constructor(props) {
@@ -14,24 +22,18 @@ class Auth extends Component {
     if (publicList.includes(pathname)) {
       return
     }
-    // 是否登录
-    getUserInfo().then(res => {
-      const { code } = res
-      if (code === 0) {
-        // 登录
-      } else {
-        this.props.history.push('/login')
-      }
-    })
 
-    // 现在的URL地址
-    // 用户的身份
-    // 用户是否完善信息 (选择头像 个人简介)
+    getUserInfo().then(res => {
+      this.props.authSuccess(res.data)
+    }).catch(e => {
+      this.props.history.push('/login')
+    })
   }
 
-  render() { 
+  render() {
+    const el = this.props.redirectTo ? <Redirect to={this.props.redirectTo}></Redirect> : null
     return (
-      <div>这是一个Auth页</div>
+      <div>{el}</div>
     )
   }
 }

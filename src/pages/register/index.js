@@ -1,7 +1,8 @@
 import React from 'react'
-import Logo from '../../component/logo'
+import Logo from '@/component/logo'
 import { List, InputItem, WingBlank, WhiteSpace, Button, Radio } from 'antd-mobile'
 import { connect } from 'react-redux'
+import { Redirect} from 'react-router-dom'
 import { register } from '@/redux/user'
 
 @connect(
@@ -15,7 +16,7 @@ class Register extends React.Component {
       account: '',
       password: '',
       repeatpwd: '',
-      type: 'genuis'
+      type: 'genius'
     }
   }
 
@@ -27,13 +28,14 @@ class Register extends React.Component {
 
   handleRegister() {
     this.props.register(this.state)
-    // console.log(this.state)
   }
 
   render () {
     const { RadioItem } = Radio
+    // {this.props.redirectTo !== '/login' ? <Redirect to={this.props.redirectTo} /> : null}
     return (
-      <div>
+      <div className='container'>
+        
         <Logo />
         <List>
           <InputItem
@@ -50,9 +52,9 @@ class Register extends React.Component {
             placeholder='请再次输入密码'
             onChange={(v) => this.handleChange('repeatpwd', v)}
           >确认密码</InputItem>
-          <RadioItem    
-            checked={this.state.type === 'genuis'}
-            onChange={() => this.handleChange('type', 'genuis')}
+          <RadioItem
+            checked={this.state.type === 'genius'}
+            onChange={() => this.handleChange('type', 'genius')}
           >
             牛人
           </RadioItem>
