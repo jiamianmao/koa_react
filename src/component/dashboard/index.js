@@ -3,20 +3,23 @@ import { connect } from 'react-redux'
 import { NavBar } from 'antd-mobile'
 import { Switch, Route } from 'react-router-dom'
 import NavLinkBar from '@/component/navlink'
+import { replyMsg } from '@/redux/chat'
 
 import Boss from '@/pages/boss'
 import Genius from '@/pages/genius'
 import User from '@/pages/user'
-
-function Msg() {
-  return <h2>消息</h2>
-}
+import Msg from '@/pages/msg'
 
 @connect(
-  state => state
+  state => state,
+  { replyMsg }
 )
 class Dashboard extends Component {
-  
+
+  componentDidMount() {
+    this.props.replyMsg()
+  }
+
   render() {
     const user = this.props.user
     const { pathname } = this.props.location
@@ -40,7 +43,8 @@ class Dashboard extends Component {
         text: '消息',
         icon: 'msg',
         title: '消息列表',
-        component: Msg
+        component: Msg,
+        unread: this.props.chat.unread
       }, {
         path: '/me',
         text: '我',

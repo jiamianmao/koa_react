@@ -24,7 +24,7 @@ const ChatSchema = new Schema({
   },
   'create_time': {
     type: Number,
-    default: +new Date()
+    default: new Date().getTime()
   }
 })
 

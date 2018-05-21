@@ -36,8 +36,16 @@ export function getUserList(type) {
   })
 }
 
-export function getUserMsgList() {
+export function getUserMsgList(chatId) {
   return request({
-    url: '/user/msglist'
+    url: `/user/msglist?chatId=${chatId}`
+  })
+}
+
+export function toReadMsg(from) {
+  return request({
+    url: '/user/readmsg',
+    method: 'post',
+    data: { from }
   })
 }

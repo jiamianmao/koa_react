@@ -12,7 +12,6 @@ const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
   socket.on('sendmsg', async (data) => {
-    console.log(data)
     const { from, to, msg } = data
     const chatid = [from, to].sort().join('_')
     let result = await Chat.create({
@@ -21,7 +20,7 @@ io.on('connection', (socket) => {
       to,
       content: msg
     })
-    io.emit('reply', result)    
+    io.emit('reply', result)
   })
 })
 

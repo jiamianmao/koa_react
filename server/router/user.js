@@ -10,6 +10,7 @@ api.post('/update', User.signinRequire, User.update)
 api.get('/list', User.userList)
 api.get('/info', User.userInfo)
 api.get('/msglist', Chat.msgList)
+api.post('/readmsg', Chat.readMsg)
 
 router.use('/user', api.routes(), api.allowedMethods())
 
